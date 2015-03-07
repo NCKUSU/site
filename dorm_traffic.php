@@ -1,26 +1,28 @@
 <?php
-date_default_timezone_set("Asia/Taipei");
-$date=date("Ymd");
-function transform ($byte)
+date_default_timezone_set("Asia/Taipei");//設定時區為GMT+8
+$date=date("Ymd");設定時間格式
+
+function transform ($byte)//單位轉換函數
 {
 if ($byte >="1000")//byte轉換kb
  {
      $kb=floor($byte/1000);
      $byte=$byte%1000;
  }
-if($kb >=1000)
+if($kb >=1000)//kb轉換mb
  {
 	$mb=floor($kb/1000);
  	$kb=$kb%1000;
 	$gb=$mb/1000;
  	$mb=$mb%1000;
  }
-return array("$gb","$mb","$kb","$bytes");
+return array("$gb","$mb","$kb","$bytes");//以矩陣回傳轉換結果
 }
-$db_server = "localhost";
-$db_name = "dorm";
-$db_user = "nckusu";
-$db_passwd = "nckusucsie";
+//資料庫帳號密碼
+$db_server = "";
+$db_name = "";
+$db_user = "";
+$db_passwd = "";
 if(!@mysql_connect($db_server, $db_user, $db_passwd))
         die("無法對資料庫連線");
 mysql_query("SET NAMES utf8");
