@@ -28,12 +28,13 @@ if(!@mysql_connect($db_server, $db_user, $db_passwd))
 mysql_query("SET NAMES utf8");
 if(!@mysql_select_db($db_name))
         die("無法使用資料庫");
-$ip = $_SERVER["REMOTE_ADDR"];
-//$ip = "140.116.102.183";
-$ipcut = mb_substr($ip,0,7,"utf8");
-$ipidf = mb_substr($ip,8,3,"utf8");
-/*if($ipcut == "140.116")
-{*/
+        
+ 
+$ip = $_SERVER["REMOTE_ADDR"];//抓取遠端ip位址
+//$ip = "140.116.102.183";//debug測試用
+$ipcut = mb_substr($ip,0,7,"utf8");//ip取前7碼（140.116)
+$ipidf = mb_substr($ip,8,3,"utf8");//ip第三組
+if($ipcut=="140.116"){$show_this="1";}
 if($ipidf == "101")
 {
 $str="勝一舍1F";
@@ -187,7 +188,7 @@ else if($ip == "192.168.88.1")
 $str="會辦";
 }
 $disp = $ip."(".$str.")";
-if($str != null)
+if($str != null && $show_this=="1")
 {
 echo "<h2>宿網流量監控系統</h2>";
 echo "<div class=\"title1\" style=\"color:#398f14;font-size:18px;\">$disp</div><br>";
